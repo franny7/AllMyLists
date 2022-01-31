@@ -53,15 +53,58 @@ router.post(
 // @route   PUT api/lists/:id
 // @desc    Update list
 // @access    Private
-router.put('/:id', (req, res) => {
-  res.send('Update list');
+router.put('/:id', auth, async (req, res) => {
+  const { name, email } = req.body;
+
+  // Build a list object
+  const listFields = {};
+  if (name) listFields.name = name;
+  if (email) listFields.email = email;
+
+  try {
+    let list = await List.findById(req.params.id);
+
+    if (!list) return res.status(404).json({ msg: 'List not found' });
+
+    // Make sure user owns list
+    if (list.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    list = await List.findByIdAndUpdate(
+      req.params.id,
+      { $set: listFields },
+      { new: true }
+    );
+
+    res.json(list);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 // @route   DELETE api/lists/:id
 // @desc    Delete list
 // @access    Private
-router.delete('/:id', (req, res) => {
-  res.send('Delete list');
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    let list = await List.findById(req.params.id);
+
+    if (!list) return res.status(404).json({ msg: 'List not found' });
+
+    // Make sure user owns list
+    if (list.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    await List.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: 'List removed' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 module.exports = router;
