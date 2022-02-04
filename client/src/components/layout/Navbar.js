@@ -26,7 +26,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'All My Lists',
+  title: 'WhatWeNeed',
   icon: 'fas fa-clipboard-list',
 };
 
