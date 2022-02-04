@@ -1,9 +1,13 @@
 import React from 'react';
+import Lists from '../lists/Lists';
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className='grid-2'>
+      <div>{/* ListForm */}</div>
+      <div>
+        <Lists />
+      </div>
     </div>
   );
 };
