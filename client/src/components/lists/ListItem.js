@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import ListContext from '../../context/list/listContext';
 
 const ListItem = ({ list }) => {
+  const listContext = useContext(ListContext);
+  const { deleteList } = listContext;
+
   const { id, name, email } = list;
+
+  const onDelete = () => {
+    deleteList(id);
+  };
 
   return (
     <div className='card bg-light'>
@@ -16,7 +24,9 @@ const ListItem = ({ list }) => {
       </ul>
       <p>
         <button className='btn btn-dark btn-sm'>Edit</button>
-        <button className='btn btn-danger btn-sm'>Delete</button>
+        <button className='btn btn-danger btn-sm' onClick={onDelete}>
+          Delete
+        </button>
       </p>
     </div>
   );

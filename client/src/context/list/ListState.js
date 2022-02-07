@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import ListContext from './listContext';
 import listReducer from './listReducer';
 import {
@@ -37,8 +37,15 @@ const ListState = (props) => {
   const [state, dispatch] = useReducer(listReducer, initialState);
 
   // Add List
+  const addList = (list) => {
+    list.id = uuidv4();
+    dispatch({ type: ADD_LIST, payload: list });
+  };
 
   // Delete List
+  const deleteList = (id) => {
+    dispatch({ type: DELETE_LIST, payload: id });
+  };
 
   // Set Current List
 
@@ -54,6 +61,8 @@ const ListState = (props) => {
     <ListContext.Provider
       value={{
         lists: state.lists,
+        addList,
+        deleteList,
       }}
     >
       {props.children}
