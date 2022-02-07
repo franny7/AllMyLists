@@ -32,6 +32,7 @@ const ListState = (props) => {
         email: '3',
       },
     ],
+    current: null,
   };
 
   const [state, dispatch] = useReducer(listReducer, initialState);
@@ -48,10 +49,19 @@ const ListState = (props) => {
   };
 
   // Set Current List
+  const setCurrent = (list) => {
+    dispatch({ type: SET_CURRENT, payload: list });
+  };
 
   // Clear Current List
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
 
   // Update List
+  const updateList = (list) => {
+    dispatch({ type: UPDATE_LIST, payload: list });
+  };
 
   // Filter Lists
 
@@ -61,8 +71,12 @@ const ListState = (props) => {
     <ListContext.Provider
       value={{
         lists: state.lists,
+        current: state.current,
         addList,
         deleteList,
+        setCurrent,
+        clearCurrent,
+        updateList,
       }}
     >
       {props.children}

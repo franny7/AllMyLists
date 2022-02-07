@@ -1,8 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ListContext from '../../context/list/listContext';
 
 const ListForm = () => {
   const listContext = useContext(ListContext);
+
+  const { addList, updateList, clearCurrent, current } = listContext;
+
+  useEffect(() => {
+    if (current !== null) {
+      setList(current);
+    } else {
+      setList({
+        name: '',
+        email: '',
+      });
+    }
+  }, [listContext, current]);
 
   const [list, setList] = useState({
     name: '',
@@ -15,16 +28,21 @@ const ListForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    listContext.addList(list);
-    setList({
-      name: '',
-      email: '',
-    });
+    if (current === null) {
+      addList(list);
+    } else {
+      updateList(list);
+    }
+    clearAll();
+  };
+
+  const clearAll = () => {
+    clearCurrent();
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className='text-primary'>Add Item</h2>
+      <h2 className='text-primary'>{current ? 'Edit Item' : 'Add Item'}</h2>
       <input
         type='text'
         placeholder='Name'
@@ -42,10 +60,17 @@ const ListForm = () => {
       <div>
         <input
           type='submit'
-          value='Add To List'
+          value={current ? 'Update Item' : 'Add Item'}
           className='btn btn-primary btn-block'
         />
       </div>
+      {current && (
+        <div>
+          <button className='btn btn-light btn-block' onClick={clearAll}>
+            Clear
+          </button>
+        </div>
+      )}
     </form>
   );
 };

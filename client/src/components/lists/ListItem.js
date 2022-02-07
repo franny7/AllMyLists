@@ -4,12 +4,13 @@ import ListContext from '../../context/list/listContext';
 
 const ListItem = ({ list }) => {
   const listContext = useContext(ListContext);
-  const { deleteList } = listContext;
+  const { deleteList, setCurrent, clearCurrent } = listContext;
 
   const { id, name, email } = list;
 
   const onDelete = () => {
     deleteList(id);
+    clearCurrent();
   };
 
   return (
@@ -23,7 +24,12 @@ const ListItem = ({ list }) => {
         )}
       </ul>
       <p>
-        <button className='btn btn-dark btn-sm'>Edit</button>
+        <button
+          className='btn btn-dark btn-sm'
+          onClick={() => setCurrent(list)}
+        >
+          Edit
+        </button>
         <button className='btn btn-danger btn-sm' onClick={onDelete}>
           Delete
         </button>
