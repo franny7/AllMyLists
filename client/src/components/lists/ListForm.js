@@ -13,6 +13,7 @@ const ListForm = () => {
       setList({
         name: '',
         email: '',
+        type: 'grocery',
       });
     }
   }, [listContext, current]);
@@ -20,6 +21,7 @@ const ListForm = () => {
   const [list, setList] = useState({
     name: '',
     email: '',
+    type: 'grocery',
   });
 
   const { name, email } = list;

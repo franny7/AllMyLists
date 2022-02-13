@@ -1,6 +1,7 @@
 import React from 'react';
 import Lists from '../lists/Lists';
 import ListForm from '../lists/ListForm';
+import ListFilter from '../lists/ListFilter';
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
         <ListForm />
       </div>
       <div>
+        <ListFilter />
         <Lists />
       </div>
     </div>

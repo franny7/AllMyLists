@@ -33,6 +33,7 @@ const ListState = (props) => {
       },
     ],
     current: null,
+    filtered: null,
   };
 
   const [state, dispatch] = useReducer(listReducer, initialState);
@@ -64,19 +65,28 @@ const ListState = (props) => {
   };
 
   // Filter Lists
+  const filterLists = (text) => {
+    dispatch({ type: FILTER_LISTS, payload: text });
+  };
 
   // Clear Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
 
   return (
     <ListContext.Provider
       value={{
         lists: state.lists,
         current: state.current,
+        filtered: state.filtered,
         addList,
         deleteList,
         setCurrent,
         clearCurrent,
         updateList,
+        filterLists,
+        clearFilter,
       }}
     >
       {props.children}

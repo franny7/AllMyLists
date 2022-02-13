@@ -37,6 +37,19 @@ export default (state, action) => {
         ...state,
         current: null,
       };
+    case FILTER_LISTS:
+      return {
+        ...state,
+        filtered: state.lists.filter(({ name, email }) => {
+          const testString = `${name}${email}`.toLowerCase();
+          return testString.includes(action.payload.toLowerCase());
+        }),
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null,
+      };
     default:
       return state;
   }
