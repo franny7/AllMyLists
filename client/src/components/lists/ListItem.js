@@ -6,10 +6,10 @@ const ListItem = ({ list }) => {
   const listContext = useContext(ListContext);
   const { deleteList, setCurrent, clearCurrent } = listContext;
 
-  const { id, name, email } = list;
+  const { _id, name, email } = list;
 
   const onDelete = () => {
-    deleteList(id);
+    deleteList(_id);
     clearCurrent();
   };
 
