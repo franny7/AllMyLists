@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://panchetz7:Liamnles123@allmylists.dwpsl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
+}
