@@ -13,6 +13,7 @@ import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
 import setAuthToken from './utils/setAuthToken';
 import './App.css';
+import background from './groceries.jpg';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -26,6 +27,7 @@ const App = () => {
           <Router>
             <Fragment>
               <Navbar />
+
               <div className='container'>
                 <Alerts />
                 <Routes>
