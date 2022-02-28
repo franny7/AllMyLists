@@ -17,7 +17,7 @@
 
 html {
   height: 100vh;
-  background-image: url('/src/groceries.jpg');
+  background-image: url('/src/blueberries.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -76,6 +76,10 @@ img {
 
 .text-center {
   text-align: center;
+}
+
+.text-light {
+  color: var(--light-color);
 }
 
 .text-primary {
