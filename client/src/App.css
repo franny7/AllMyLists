@@ -2,7 +2,7 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #13694d;
+  --primary-color: #bd5500;
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #8d212c;
@@ -17,7 +17,7 @@
 
 html {
   height: 100vh;
-  background-image: url('/src/blueberries.jpg');
+  background-image: url('/src/leaves-bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
